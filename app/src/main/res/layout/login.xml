@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:background="#FFF7F7F7"
+        android:textSize="18sp"
+        android:text="有茶门店管理移动端"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="100dp"
+        android:gravity="center"
+        android:text="欢迎登陆YO!Tea有茶门店系统"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:text="账号"/>
+
+        <EditText
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:id="@+id/shop_number"
+            android:layout_marginStart="40dp"
+            android:paddingStart="10dp"
+            android:background="@drawable/editor_bg"
+            android:hint="请输入门店账号"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:text="密码"/>
+
+        <EditText
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:id="@+id/password"
+            android:layout_marginStart="40dp"
+            android:paddingStart="10dp"
+            android:background="@drawable/editor_bg"
+            android:hint="请输入密码"/>
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:id="@+id/login"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:text="登陆"
+        android:background="@drawable/login_bt_bg"
+        android:gravity="center"/>
+
+</LinearLayout>

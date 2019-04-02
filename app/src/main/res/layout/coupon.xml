@@ -43,6 +43,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/already_check"
                 android:text="已核销"
                 android:textSize="14sp" />
 
@@ -65,6 +66,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/pending_check"
                 android:text="待核销"
                 android:textSize="14sp" />
 

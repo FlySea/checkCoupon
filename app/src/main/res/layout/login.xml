@@ -62,6 +62,8 @@
             android:id="@+id/password"
             android:layout_marginStart="40dp"
             android:paddingStart="10dp"
+            android:singleLine="true"
+            android:inputType="textPassword"
             android:background="@drawable/editor_bg"
             android:hint="请输入密码"/>
 

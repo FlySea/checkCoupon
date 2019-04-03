@@ -98,7 +98,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
                     if (!TextUtils.isEmpty(token)) {
                         mPreferenceUtils.put(ACCOUNT_INFO, token);
                         Log.d("flysea", "login token is " + token);
-                        mActivity.changePager(MainActivity.PAGER_COUPON);
+                        mActivity.changePager(MainActivity.PAGER_COUPON, null, true);
                     } else {
                         Toast.makeText(getContext(),"账号或密码不正确", Toast.LENGTH_LONG).show();
                     }

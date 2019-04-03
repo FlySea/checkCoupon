@@ -31,9 +31,10 @@ public class CouponViewHolder extends RecyclerView.ViewHolder {
 
 	TextView mTime = itemView.findViewById(R.id.time);
 	TextView mType = itemView.findViewById(R.id.type);
-	TextView mMember = itemView.findViewById(R.id.member);
+	public TextView mMember = itemView.findViewById(R.id.member);
 	TextView mPhone = itemView.findViewById(R.id.phone);
 	TextView mStatus = itemView.findViewById(R.id.status);
+	public View root = itemView.findViewById(R.id.root);
 
 	public CouponViewHolder(@NonNull View itemView) {
 		super(itemView);

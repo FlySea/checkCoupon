@@ -22,7 +22,16 @@ public class GiftAdapter extends RecyclerView.Adapter<GiftViewHolder> {
 	private List<GiftBean.DataBean> dataList;
 	private Context mContext;
 	private LayoutInflater mInflater;
+	GiftListener mGiftListener;
 	View mView;
+
+	public interface GiftListener {
+		public void onItemClick(String type, String id);
+	}
+
+	public void setGiftListener(GiftListener giftListener) {
+		mGiftListener = giftListener;
+	}
 
 	public GiftAdapter(Context context) {
 		mContext = context;
@@ -47,7 +56,7 @@ public class GiftAdapter extends RecyclerView.Adapter<GiftViewHolder> {
 		if (dataList == null) {
 			return;
 		}
-		GiftBean.DataBean dataBean = dataList.get(i);
+		final GiftBean.DataBean dataBean = dataList.get(i);
 		if (dataBean!=null) {
 			giftViewHolder.setImage(dataBean.getImage());
 			giftViewHolder.setName(dataBean.getTitle());
@@ -56,6 +65,15 @@ public class GiftAdapter extends RecyclerView.Adapter<GiftViewHolder> {
 			giftViewHolder.setCheckNum(dataBean.getConsumed());
 			giftViewHolder.setPendingNum(dataBean.getNot_consumed());
 		}
+
+		giftViewHolder.mRoot.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (mGiftListener != null) {
+					mGiftListener.onItemClick(dataBean.getType(), dataBean.getId());
+				}
+			}
+		});
 	}
 
 	@Override

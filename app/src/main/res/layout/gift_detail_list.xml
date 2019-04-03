@@ -2,17 +2,40 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/root"
+    android:layout_marginStart="5dp"
+    android:layout_marginEnd="5dp"
+    android:layout_marginTop="5dp"
     android:orientation="vertical">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:text="礼品列表" />
+        android:layout_marginBottom="5dp"
+        android:orientation="horizontal">
 
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_left_arrow"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="2dp"
+            android:id="@+id/back"
+            android:text="返回"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="已兑换列表"
+            android:textStyle="bold"
+            android:textSize="18sp"/>
+
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"
@@ -20,58 +43,52 @@
         android:layout_marginTop="10dp"
         android:background="#FFEEEBEB" />
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:layout_marginTop="5dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="礼品图片"
+            android:text="序号"
             android:layout_marginStart="15dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="礼品名称"
-            android:layout_marginStart="15dp"/>
+            android:text="兑换时间"
+            android:layout_marginStart="25dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="库存"
-            android:layout_marginStart="10dp"/>
+            android:text="会员姓名"
+            android:layout_marginStart="20dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="已兑换"
-            android:layout_marginStart="15dp"/>
+            android:text="手机号码"
+            android:layout_marginStart="25dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="已核销"
-            android:layout_marginStart="10dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="待核销"
-            android:layout_marginStart="20dp"
+            android:text="状态"
+            android:layout_marginStart="30dp"
             android:layout_marginEnd="15dp"/>
 
     </LinearLayout>
 
+
     <View
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:background="#FFADADAD"/>
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:background="#FFEEEBEB" />
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="wrap_content"

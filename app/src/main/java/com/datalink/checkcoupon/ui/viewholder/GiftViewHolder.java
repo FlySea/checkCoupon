@@ -1,6 +1,5 @@
 package com.datalink.checkcoupon.ui.viewholder;
 
-import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -8,13 +7,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.datalink.checkcoupon.R;
-import com.datalink.checkcoupon.ui.utils.ImageTools;
+import com.squareup.picasso.Picasso;
 
 public class GiftViewHolder extends RecyclerView.ViewHolder {
 
 	public void setImage(String url) {
-		Bitmap bitmap = ImageTools.getBitMap(url);
-		mImage.setImageBitmap(bitmap);
+		Picasso.get().load(url).into(mImage);
 	}
 
 	public void setName(String name) {
@@ -43,6 +41,7 @@ public class GiftViewHolder extends RecyclerView.ViewHolder {
 	TextView mExchangeNum = itemView.findViewById(R.id.exchange_num);
 	TextView mCheckNum = itemView.findViewById(R.id.check_num);
 	TextView mPendingNum = itemView.findViewById(R.id.pending_num);
+	public View mRoot = itemView.findViewById(R.id.root);
 
 	public GiftViewHolder(@NonNull View itemView) {
 		super(itemView);

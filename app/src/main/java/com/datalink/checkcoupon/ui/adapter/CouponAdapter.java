@@ -61,7 +61,9 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponViewHolder> {
 			couponViewHolder.setPhone(dataBean.getMember().getMobile_phone());
 			if (TextUtils.isEmpty(dataBean.getConsumed_at())) {
 				couponViewHolder.setStatus("待核销");
-				couponViewHolder.setTime("       ");
+				if (!TextUtils.isEmpty(dataBean.getCreated_at())) {
+					couponViewHolder.setTime(dataBean.getCreated_at());
+				}
 			} else {
 				//已核销
 				couponViewHolder.setStatus("已核销");

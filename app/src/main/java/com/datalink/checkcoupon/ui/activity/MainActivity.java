@@ -20,6 +20,7 @@ import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    //public static final int PAGER_EMPTY = -1;
     public static final int PAGER_LOGIN = 0;
     public static final int PAGER_COUPON = 1;
     public static final int PAGER_GIFT_LIST = 2;
@@ -29,12 +30,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static final int REQUEST_SCAN_CODE = 100;
     public static final String EXTRA_ID = "extra_id";
     public static final String EXTRA_TYPE = "extra_type";
+    public static final String EXTRA_SCAN_NUM = "extra_scan_num";
 
 
     LinearLayout mCardBottomTab, mGiftBottomTab;
     FrameLayout mBottomContain;
+    boolean mIsShowBottom = false;
 
-    private HashMap<Integer, Fragment> fragments = new HashMap<>();
+    //private HashMap<Integer, Fragment> fragments = new HashMap<>();
     private int currentPager = PAGER_LOGIN;
 
 
@@ -42,29 +45,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initFragment();
+        addInitLogin();
+        //initFragment();
         initView();
-        defaultFragment();
+        //defaultFragment();
+        //changePager(currentPager, null, mIsShowBottom);
     }
 
-    private void initFragment() {
-//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//        transaction.add(R.id.fragment_container, new CouponFragment());
-//        transaction.commitNow();
-        fragments.put(PAGER_LOGIN, new LoginFragment());
-        fragments.put(PAGER_COUPON, new CouponFragment());
-        fragments.put(PAGER_GIFT_LIST, new GiftFragment());
-        fragments.put(PAGER_GIFT_DETAIL, new GiftDetailListFragment());
-        fragments.put(PAGER_COUPON_DETAIL, new CouponDetailFragment());
-
-    }
-
-    private void defaultFragment() {
+    private void addInitLogin() {
+        Fragment fragment = getChangerFragment(PAGER_LOGIN);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.fragment_container, fragments.get(PAGER_LOGIN));
-        currentPager = PAGER_LOGIN;
+        transaction.add(R.id.fragment_container, fragment);
         transaction.commitNow();
+
     }
+
+//    private void initFragment() {
+////        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+////        transaction.add(R.id.fragment_container, new CouponFragment());
+////        transaction.commitNow();
+//        fragments.put(PAGER_LOGIN, new LoginFragment());
+//        fragments.put(PAGER_COUPON, new CouponFragment());
+//        fragments.put(PAGER_GIFT_LIST, new GiftFragment());
+//        fragments.put(PAGER_GIFT_DETAIL, new GiftDetailListFragment());
+//        fragments.put(PAGER_COUPON_DETAIL, new CouponDetailFragment());
+//
+//    }
+
+//    private void defaultFragment() {
+//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//        transaction.add(R.id.fragment_container, fragments.get(PAGER_LOGIN));
+//        currentPager = PAGER_LOGIN;
+//        transaction.commitNow();
+//    }
 
     public void setBottomTabVisibility(boolean isVisible) {
         if (mBottomContain!=null) {
@@ -99,11 +112,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //    }
 
     public void changePager(int pagerIndex, Bundle bundle, boolean isShowBottomView) {
+
+        mIsShowBottom = isShowBottomView;
+
+//        if (currentPager == PAGER_EMPTY) {
+//            pagerIndex = PAGER_LOGIN;
+//        }
+
         if (currentPager == pagerIndex) {
             return;
         }
 
-        Fragment fragment = fragments.get(pagerIndex);
+        Fragment fragment = getChangerFragment(pagerIndex);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
         if (bundle != null) {
@@ -111,12 +131,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             fragment.setArguments(args);
         }
 
-        if (!fragment.isAdded()) {
-            transaction.add(R.id.fragment_container, fragment);
-        }
+//        if (!fragment.isAdded()) {
+//            transaction.add(R.id.fragment_container, fragment);
+//        }
 
-        transaction.hide(fragments.get(currentPager));
-        transaction.show(fragments.get(pagerIndex));
+//        if (currentPager != PAGER_EMPTY) {
+//            transaction.hide(fragments.get(currentPager));
+//        }
+//        transaction.show(fragments.get(pagerIndex));
+
+        transaction.replace(R.id.fragment_container, fragment);
         currentPager = pagerIndex;
 
         setBottomTabVisibility(isShowBottomView);
@@ -126,6 +150,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    private Fragment getChangerFragment(int index) {
+        switch (index) {
+            case PAGER_LOGIN:
+                return new LoginFragment();
+
+            case PAGER_COUPON:
+                return new CouponFragment();
+
+            case PAGER_GIFT_LIST:
+                return new GiftFragment();
+
+            case PAGER_GIFT_DETAIL:
+                return new GiftDetailListFragment();
+
+            case PAGER_COUPON_DETAIL:
+                return new CouponDetailFragment();
+
+            default:
+                return new LoginFragment();
+        }
+    }
 
 
     private void initView(){

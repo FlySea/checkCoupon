@@ -24,6 +24,7 @@ import com.datalink.checkcoupon.ui.model.CheckErrorBean;
 import com.datalink.checkcoupon.ui.model.CouponBean;
 import com.datalink.checkcoupon.ui.net.CheckService;
 import com.datalink.checkcoupon.ui.net.CouponService;
+import com.datalink.checkcoupon.ui.utils.ErrorMsg;
 import com.datalink.checkcoupon.ui.utils.PreferenceUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -44,7 +45,9 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.datalink.checkcoupon.ui.activity.MainActivity.EXTRA_ID;
+import static com.datalink.checkcoupon.ui.activity.MainActivity.EXTRA_SCAN_NUM;
 import static com.datalink.checkcoupon.ui.activity.MainActivity.PAGER_COUPON_DETAIL;
+import static com.datalink.checkcoupon.ui.activity.MainActivity.PAGER_LOGIN;
 import static com.datalink.checkcoupon.ui.activity.MainActivity.REQUEST_SCAN_CODE;
 import static com.datalink.checkcoupon.ui.utils.PreferenceUtils.ACCOUNT_INFO;
 
@@ -60,6 +63,9 @@ public class CouponFragment extends BaseFragment implements View.OnClickListener
     TextView mPendingCheck;
     View mPendingIndicator;
     ImageView mScan;
+    ImageView mCircle;
+    TextView mChangeShop;
+    TextView mTimeSpace;
     PreferenceUtils mPreferenceUtils;
     int mPosition = POSITION_INIT;
     String mToken;
@@ -67,18 +73,16 @@ public class CouponFragment extends BaseFragment implements View.OnClickListener
     CouponAdapter mCouponAdapter;
 
     CouponService mCouponService;
-    CheckService mCheckService;
+
     Retrofit mRetrofit = new Retrofit.Builder().baseUrl("https://erp.cblink.net/")
             .addConverterFactory(GsonConverterFactory.create()).build();
 
-	Retrofit mCheckRetrofit = new Retrofit.Builder().baseUrl("https://erp.cblink.net/")
-			.addConverterFactory(GsonConverterFactory.create()).build();
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mCouponService = mRetrofit.create(CouponService.class);
-        mCheckService = mCheckRetrofit.create(CheckService.class);
         mPreferenceUtils = new PreferenceUtils(getContext());
         mActivity = ((MainActivity) getActivity());
         mToken = mPreferenceUtils.getString(ACCOUNT_INFO, "");
@@ -96,6 +100,9 @@ public class CouponFragment extends BaseFragment implements View.OnClickListener
         mAlreadyIndicator = view.findViewById(R.id.indicator_already);
         mPendingIndicator = view.findViewById(R.id.indicator_prepare);
         mScan = view.findViewById(R.id.scan);
+        mCircle = view.findViewById(R.id.circle);
+        mChangeShop = view.findViewById(R.id.change_shop);
+        mTimeSpace = view.findViewById(R.id.time_space);
         initView();
         initAdapter();
 		inflateAlreadyData();
@@ -106,20 +113,22 @@ public class CouponFragment extends BaseFragment implements View.OnClickListener
         mAlreadyCheck.setOnClickListener(this);
         mPendingCheck.setOnClickListener(this);
         mScan.setOnClickListener(this);
+        mCircle.setOnClickListener(this);
+        mChangeShop.setOnClickListener(this);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
     }
 
     private void initAdapter() {
     	mCouponAdapter = new CouponAdapter(getContext());
-    	mCouponAdapter.setCouponListener(new CouponAdapter.CouponListener() {
-			@Override
-			public void onItemClick(String id) {
-				Log.d("flysea", "mCouponAdapter onItemClick id = " + id);
-				Bundle bundle = new Bundle();
-				bundle.putString(EXTRA_ID, id);
-				mActivity.changePager(PAGER_COUPON_DETAIL, bundle, false);
-			}
-		});
+//    	mCouponAdapter.setCouponListener(new CouponAdapter.CouponListener() {
+//			@Override
+//			public void onItemClick(String id) {
+//				Log.d("flysea", "mCouponAdapter onItemClick id = " + id);
+//				Bundle bundle = new Bundle();
+//				bundle.putString(EXTRA_ID, id);
+//				mActivity.changePager(PAGER_COUPON_DETAIL, bundle, false);
+//			}
+//		});
     	mRecyclerView.setAdapter(mCouponAdapter);
 	}
 
@@ -150,7 +159,9 @@ public class CouponFragment extends BaseFragment implements View.OnClickListener
 					CouponBean couponBean = gson.fromJson(responseStr, type);
 
 					if ( couponBean == null || couponBean.getData() == null || couponBean.getData().getData() == null) {
-						Toast.makeText(getContext(),"数据解析异常", Toast.LENGTH_LONG).show();
+						if (!TextUtils.isEmpty(ErrorMsg.getErrMsg(responseStr))) {
+							Toast.makeText(getContext(), ErrorMsg.getErrMsg(responseStr), Toast.LENGTH_LONG).show();
+						}
 						return;
 					}
 
@@ -190,8 +201,10 @@ public class CouponFragment extends BaseFragment implements View.OnClickListener
         switch (v.getId()) {
             case R.id.already_check:
                 inflateAlreadyData();
+                mTimeSpace.setText("核销时间");
                 break;
             case R.id.pending_check:
+                mTimeSpace.setText("兑换时间");
                 inflatePendingData();
                 break;
 			case R.id.scan:
@@ -201,6 +214,10 @@ public class CouponFragment extends BaseFragment implements View.OnClickListener
 				} else {
 					ActivityCompat.requestPermissions(mActivity, new String[]{Manifest.permission.CAMERA},0);
 				}
+				break;
+			case R.id.circle:
+			case R.id.change_shop:
+				mActivity.changePager(PAGER_LOGIN, null, false);
 				break;
         }
     }
@@ -221,7 +238,10 @@ public class CouponFragment extends BaseFragment implements View.OnClickListener
 				if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
 					String result = bundle.getString(CodeUtils.RESULT_STRING);
 					Log.d("flysea", "flysea scan result : "+result);
-					processCheck(result);
+					Bundle arg = new Bundle();
+					arg.putString(EXTRA_SCAN_NUM, result);
+					mActivity.changePager(PAGER_COUPON_DETAIL, arg, false);
+					//processCheck(result);
 					//Toast.makeText(getContext(), "flysea scan result : "+result , Toast.LENGTH_SHORT).show();
 				} else if(bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED){
 					Toast.makeText(getContext(), "scan error" , Toast.LENGTH_SHORT).show();
@@ -231,40 +251,14 @@ public class CouponFragment extends BaseFragment implements View.OnClickListener
 		}
 	}
 
-	private void processCheck(String numberStr) {
-		final Gson gson = new Gson();
-		HashMap<String, String> parasMaps = new HashMap<>();
-		parasMaps.put("number", numberStr);
-		String strEntity = gson.toJson(parasMaps);
-		final RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), strEntity);
-		Call<ResponseBody> call = mCheckService.postConsume(requestBody, mToken);
-		call.enqueue(new Callback<ResponseBody>() {
-			@Override
-			public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-				try {
-					Gson gs = new Gson();
-					String responseStr = response.body().string();
-					if (responseStr.contains("err_code")) {
-						java.lang.reflect.Type type = new TypeToken<CheckErrorBean>() {}.getType();
-						CheckErrorBean errorBean = gs.fromJson(responseStr, type);
-						if (errorBean !=null && !TextUtils.isEmpty(errorBean.getMsg())) {
-							Toast.makeText(getContext(),"核销失败：" + errorBean.getMsg(),Toast.LENGTH_LONG).show();
-						}
-
-					} else {
-						Toast.makeText(getContext(),"核销成功",Toast.LENGTH_LONG).show();
-					}
-				} catch (IOException e) {
-					e.printStackTrace();
-					Toast.makeText(getContext(),"扫码解析异常", Toast.LENGTH_SHORT).show();
-				}
-
-			}
-
-			@Override
-			public void onFailure(Call<ResponseBody> call, Throwable t) {
-				Toast.makeText(getContext(),"扫码结果异常", Toast.LENGTH_SHORT).show();
-			}
-		});
+	@Override
+	public void onResume() {
+		super.onResume();
+		if (mPosition == POSITION_ALREADY) {
+            inflateAlreadyData();
+        }
+		else {
+            inflatePendingData();
+        }
 	}
 }

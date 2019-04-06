@@ -1,8 +1,10 @@
 package com.datalink.checkcoupon.ui.fragment;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -53,6 +55,14 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
         mPreferenceUtils = new PreferenceUtils(getContext());
         mActivity = ((MainActivity) getActivity());
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d("flysea", "Login onresume");
+        mShopNumber.setText("");
+        mPassword.setText("");
     }
 
     @Nullable
@@ -134,4 +144,25 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
 
         }
     }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            Log.d("flysea", "isVisibleToUser");
+                mShopNumber.setText("");
+                mPassword.setText("");
+
+        }
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        Log.d("flysea", "onHiddenChanged  hidden = "+hidden);
+        mShopNumber.setText("");
+        mPassword.setText("");
+
+    }
+
 }

@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import com.datalink.checkcoupon.ui.activity.MainActivity;
 import com.datalink.checkcoupon.ui.adapter.GiftAdapter;
 import com.datalink.checkcoupon.ui.model.GiftBean;
 import com.datalink.checkcoupon.ui.net.GiftService;
+import com.datalink.checkcoupon.ui.utils.ErrorMsg;
 import com.datalink.checkcoupon.ui.utils.PreferenceUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -82,7 +84,9 @@ public class GiftFragment extends BaseFragment {
                     GiftBean giftBean = gson.fromJson(responseStr, type);
 
                     if ( giftBean == null || giftBean.getData() == null ) {
-                        Toast.makeText(getContext(),"数据解析异常", Toast.LENGTH_LONG).show();
+                        if (!TextUtils.isEmpty(ErrorMsg.getErrMsg(responseStr))) {
+                            Toast.makeText(getContext(), ErrorMsg.getErrMsg(responseStr), Toast.LENGTH_LONG).show();
+                        }
                         return;
                     }
 
@@ -112,18 +116,24 @@ public class GiftFragment extends BaseFragment {
         mRecyclerView.setAdapter(mGiftAdapter);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getGiftData();
+    }
+
     private void initAdapter() {
         mGiftAdapter = new GiftAdapter(getContext());
-        mGiftAdapter.setGiftListener(new GiftAdapter.GiftListener() {
-            @Override
-            public void onItemClick(String type, String id) {
-                Log.d("flysea", "mCouponAdapter onItemClick id = " + id);
-                Bundle bundle = new Bundle();
-                bundle.putString(EXTRA_ID, id);
-                bundle.putString(EXTRA_TYPE, type);
-                mActivity.changePager(PAGER_GIFT_DETAIL, bundle, false);
-
-            }
-        });
+//        mGiftAdapter.setGiftListener(new GiftAdapter.GiftListener() {
+//            @Override
+//            public void onItemClick(String type, String id) {
+//                Log.d("flysea", "mCouponAdapter onItemClick id = " + id);
+//                Bundle bundle = new Bundle();
+//                bundle.putString(EXTRA_ID, id);
+//                bundle.putString(EXTRA_TYPE, type);
+//                mActivity.changePager(PAGER_GIFT_DETAIL, bundle, false);
+//
+//            }
+//        });
     }
 }

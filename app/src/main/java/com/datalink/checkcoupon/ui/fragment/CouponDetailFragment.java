@@ -1,8 +1,10 @@
 package com.datalink.checkcoupon.ui.fragment;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,15 +17,21 @@ import android.widget.Toast;
 
 import com.datalink.checkcoupon.R;
 import com.datalink.checkcoupon.ui.activity.MainActivity;
+import com.datalink.checkcoupon.ui.model.CheckErrorBean;
 import com.datalink.checkcoupon.ui.model.CouponDetailBean;
+import com.datalink.checkcoupon.ui.net.CheckService;
 import com.datalink.checkcoupon.ui.net.CouponDetailService;
+import com.datalink.checkcoupon.ui.utils.ErrorMsg;
 import com.datalink.checkcoupon.ui.utils.PreferenceUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
+import java.util.HashMap;
 
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,7 +39,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static com.datalink.checkcoupon.ui.activity.MainActivity.EXTRA_ID;
+import static com.datalink.checkcoupon.ui.activity.MainActivity.EXTRA_SCAN_NUM;
 import static com.datalink.checkcoupon.ui.activity.MainActivity.PAGER_COUPON;
 import static com.datalink.checkcoupon.ui.utils.PreferenceUtils.ACCOUNT_INFO;
 
@@ -50,19 +58,24 @@ public class CouponDetailFragment extends BaseFragment implements View.OnClickLi
 	TextView mStock;
 	Button mConfirm;
 	String mToken;
-	String mId;
+	String mScanNum;
 
 	CouponDetailService mCouponDetailService;
+	CheckService mCheckService;
 	Retrofit mRetrofit = new Retrofit.Builder().baseUrl("https://erp.cblink.net/")
+			.addConverterFactory(GsonConverterFactory.create()).build();
+
+	Retrofit mCheckRetrofit = new Retrofit.Builder().baseUrl("https://erp.cblink.net/")
 			.addConverterFactory(GsonConverterFactory.create()).build();
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		if (getArguments() != null ) {
-			mId = getArguments().getString(EXTRA_ID);
+			mScanNum = getArguments().getString(EXTRA_SCAN_NUM);
 		}
 		mCouponDetailService = mRetrofit.create(CouponDetailService.class);
+		mCheckService = mCheckRetrofit.create(CheckService.class);
 		mPreferenceUtils = new PreferenceUtils(getContext());
 		mActivity = ((MainActivity) getActivity());
 		mToken = mPreferenceUtils.getString(ACCOUNT_INFO, "");
@@ -83,7 +96,7 @@ public class CouponDetailFragment extends BaseFragment implements View.OnClickLi
 		mStock = view.findViewById(R.id.now_stock);
 		mConfirm = view.findViewById(R.id.confirm_exchange);
 		initView();
-		getCouponDetailData(mId);
+		getCouponDetailData(mScanNum);
 		return view;
 	}
 
@@ -94,18 +107,24 @@ public class CouponDetailFragment extends BaseFragment implements View.OnClickLi
 		mBack.setOnClickListener(this);
 	}
 
+	@Override
+	public void onResume() {
+		super.onResume();
+		getCouponDetailData(mScanNum);
+	}
+
 	public void setId(String id) {
-		mId = id;
-		getCouponDetailData(mId);
+		mScanNum = id;
+		getCouponDetailData(mScanNum);
 	}
 
 	CouponDetailBean detailBean;
 
-	private void getCouponDetailData(String id) {
-		if (TextUtils.isEmpty(id)) {
+	private void getCouponDetailData(String qrStr) {
+		if (TextUtils.isEmpty(qrStr)) {
 			return;
 		}
-		Call<ResponseBody> call = mCouponDetailService.getCouponDetail(id, mToken);
+		Call<ResponseBody> call = mCouponDetailService.getCouponQrDetail(qrStr, mToken);
 		call.enqueue(new Callback<ResponseBody>() {
 			@Override
 			public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -117,7 +136,9 @@ public class CouponDetailFragment extends BaseFragment implements View.OnClickLi
 					detailBean = gson.fromJson(responseStr, type);
 
 					if ( detailBean == null || detailBean.getData() == null) {
-						Toast.makeText(getContext(),"数据解析异常", Toast.LENGTH_LONG).show();
+						if (!TextUtils.isEmpty(ErrorMsg.getErrMsg(responseStr))) {
+							Toast.makeText(getContext(), ErrorMsg.getErrMsg(responseStr), Toast.LENGTH_LONG).show();
+						}
 						return;
 					}
 
@@ -156,8 +177,76 @@ public class CouponDetailFragment extends BaseFragment implements View.OnClickLi
 				mActivity.changePager(PAGER_COUPON, null, true);
 				break;
 			case R.id.confirm_exchange:
-
+				processCheck(mScanNum);
 				break;
 		}
+	}
+
+	private void processCheck(String numberStr) {
+		final Gson gson = new Gson();
+		HashMap<String, String> parasMaps = new HashMap<>();
+		parasMaps.put("number", numberStr);
+		String strEntity = gson.toJson(parasMaps);
+		final RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), strEntity);
+		Call<ResponseBody> call = mCheckService.postConsume(requestBody, mToken);
+		call.enqueue(new Callback<ResponseBody>() {
+			@Override
+			public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+				try {
+					Gson gs = new Gson();
+					String responseStr = response.body().string();
+					if (responseStr.contains("err_code")) {
+						java.lang.reflect.Type type = new TypeToken<CheckErrorBean>() {}.getType();
+						CheckErrorBean errorBean = gs.fromJson(responseStr, type);
+						if (errorBean !=null && !TextUtils.isEmpty(errorBean.getMsg())) {
+							Toast.makeText(getContext(),"核销失败：" + errorBean.getMsg(),Toast.LENGTH_LONG).show();
+						}
+
+					} else {
+						//Toast.makeText(getContext(),"核销成功",Toast.LENGTH_LONG).show();
+						showAlert();
+
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
+					Toast.makeText(getContext(),"扫码解析异常", Toast.LENGTH_SHORT).show();
+				}
+
+			}
+
+			@Override
+			public void onFailure(Call<ResponseBody> call, Throwable t) {
+				Toast.makeText(getContext(),"扫码结果异常", Toast.LENGTH_SHORT).show();
+			}
+		});
+	}
+
+	private void showAlert() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+		builder.setTitle("恭喜兑换成功");     //设置对话框标题
+
+		builder.setIcon(android.R.drawable.btn_star);      //设置对话框标题前的图标
+
+		builder.setPositiveButton("知道了", new DialogInterface.OnClickListener() {
+
+			@Override
+
+			public void onClick(DialogInterface dialog, int which) {
+
+				//Toast.makeText(getActivity(), "dialog" , Toast.LENGTH_SHORT).show();
+				mActivity.changePager(PAGER_COUPON, null, true);
+
+			}
+
+		});
+
+		builder.setCancelable(false);   //设置按钮是否可以按返回键取消,false则不可以取消
+
+		AlertDialog dialog = builder.create();  //创建对话框
+
+		dialog.setCanceledOnTouchOutside(false);      //设置弹出框失去焦点是否隐藏,即点击屏蔽其它地方是否隐藏
+
+		dialog.show();
 	}
 }

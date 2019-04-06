@@ -72,6 +72,7 @@ public class CouponBean {
 
             private int id;
             private String consumed_at;
+            private String created_at;
             private String normalize_exchangeable_name;
             private MemberBean member;
 
@@ -89,6 +90,14 @@ public class CouponBean {
 
             public void setConsumed_at(String consumed_at) {
                 this.consumed_at = consumed_at;
+            }
+
+            public String getCreated_at() {
+                return created_at;
+            }
+
+            public void setCreated_at(String created_at) {
+                this.created_at = consumed_at;
             }
 
             public String getNormalize_exchangeable_name() {

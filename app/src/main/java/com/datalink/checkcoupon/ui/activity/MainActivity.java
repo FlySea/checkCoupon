@@ -15,12 +15,13 @@ import com.datalink.checkcoupon.ui.fragment.CouponFragment;
 import com.datalink.checkcoupon.ui.fragment.GiftDetailListFragment;
 import com.datalink.checkcoupon.ui.fragment.GiftFragment;
 import com.datalink.checkcoupon.ui.fragment.LoginFragment;
+import com.datalink.checkcoupon.ui.utils.PreferenceUtils;
 
-import java.util.HashMap;
+import static com.datalink.checkcoupon.ui.utils.PreferenceUtils.ACCOUNT_INFO;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    //public static final int PAGER_EMPTY = -1;
     public static final int PAGER_LOGIN = 0;
     public static final int PAGER_COUPON = 1;
     public static final int PAGER_GIFT_LIST = 2;
@@ -37,19 +38,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     FrameLayout mBottomContain;
     boolean mIsShowBottom = false;
 
-    //private HashMap<Integer, Fragment> fragments = new HashMap<>();
     private int currentPager = PAGER_LOGIN;
+    PreferenceUtils mPreferenceUtils;
+    String mToken;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        addInitLogin();
-        //initFragment();
+        mPreferenceUtils = new PreferenceUtils(this);
+        mToken = mPreferenceUtils.getString(ACCOUNT_INFO, "");
+        if (TextUtils.isEmpty(mToken)) {
+            addInitLogin();
+        } else {
+            changePager(PAGER_COUPON,null, true);
+        }
         initView();
-        //defaultFragment();
-        //changePager(currentPager, null, mIsShowBottom);
     }
 
     private void addInitLogin() {
@@ -60,24 +65,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-//    private void initFragment() {
-////        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-////        transaction.add(R.id.fragment_container, new CouponFragment());
-////        transaction.commitNow();
-//        fragments.put(PAGER_LOGIN, new LoginFragment());
-//        fragments.put(PAGER_COUPON, new CouponFragment());
-//        fragments.put(PAGER_GIFT_LIST, new GiftFragment());
-//        fragments.put(PAGER_GIFT_DETAIL, new GiftDetailListFragment());
-//        fragments.put(PAGER_COUPON_DETAIL, new CouponDetailFragment());
-//
-//    }
-
-//    private void defaultFragment() {
-//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//        transaction.add(R.id.fragment_container, fragments.get(PAGER_LOGIN));
-//        currentPager = PAGER_LOGIN;
-//        transaction.commitNow();
-//    }
 
     public void setBottomTabVisibility(boolean isVisible) {
         if (mBottomContain!=null) {
@@ -89,35 +76,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-//    public void changePager(int pagerIndex) {
-////        if (currentPager == pagerIndex) {
-////            return;
-////        }
-////
-////        Fragment fragment = fragments.get(pagerIndex);
-////        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-////
-////        if (!fragment.isAdded()) {
-////            transaction.add(R.id.fragment_container, fragment);
-////        }
-////
-////        transaction.hide(fragments.get(currentPager));
-////        transaction.show(fragments.get(pagerIndex));
-////        currentPager = pagerIndex;
-////
-////        if (!this.isFinishing()) {
-////            transaction.commitAllowingStateLoss();
-////        }
-//        changePager(pagerIndex, null, true);
-//    }
-
     public void changePager(int pagerIndex, Bundle bundle, boolean isShowBottomView) {
 
         mIsShowBottom = isShowBottomView;
-
-//        if (currentPager == PAGER_EMPTY) {
-//            pagerIndex = PAGER_LOGIN;
-//        }
 
         if (currentPager == pagerIndex) {
             return;
@@ -130,15 +91,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Bundle args = new Bundle(bundle);
             fragment.setArguments(args);
         }
-
-//        if (!fragment.isAdded()) {
-//            transaction.add(R.id.fragment_container, fragment);
-//        }
-
-//        if (currentPager != PAGER_EMPTY) {
-//            transaction.hide(fragments.get(currentPager));
-//        }
-//        transaction.show(fragments.get(pagerIndex));
 
         transaction.replace(R.id.fragment_container, fragment);
         currentPager = pagerIndex;

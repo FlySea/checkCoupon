@@ -31,36 +31,42 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="礼品图片"
+            android:layout_weight="1"
             android:layout_marginStart="15dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="礼品名称"
+            android:layout_weight="1"
             android:layout_marginStart="15dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="库存"
+            android:layout_weight="1"
             android:layout_marginStart="10dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="已兑换"
+            android:layout_weight="1"
             android:layout_marginStart="15dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="已核销"
+            android:layout_weight="1"
             android:layout_marginStart="10dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="待核销"
+            android:layout_weight="1"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="15dp"/>
 

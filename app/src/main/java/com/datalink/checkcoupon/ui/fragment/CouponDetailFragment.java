@@ -12,13 +12,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.datalink.checkcoupon.R;
 import com.datalink.checkcoupon.ui.activity.MainActivity;
 import com.datalink.checkcoupon.ui.model.CheckErrorBean;
-import com.datalink.checkcoupon.ui.model.CouponDetailBean;
+import com.datalink.checkcoupon.ui.model.CouponDetailMegeBean;
 import com.datalink.checkcoupon.ui.net.CheckService;
 import com.datalink.checkcoupon.ui.net.CouponDetailService;
 import com.datalink.checkcoupon.ui.utils.ErrorMsg;
@@ -60,6 +61,14 @@ public class CouponDetailFragment extends BaseFragment implements View.OnClickLi
 	String mToken;
 	String mScanNum;
 
+	TextView mName2;
+	TextView mStatus2;
+	TextView mType2;
+	TextView mValid2;
+	LinearLayout mQrStyle1;
+	LinearLayout mQrStyle2;
+
+
 	CouponDetailService mCouponDetailService;
 	CheckService mCheckService;
 	Retrofit mRetrofit = new Retrofit.Builder().baseUrl("https://erp.cblink.net/")
@@ -95,6 +104,12 @@ public class CouponDetailFragment extends BaseFragment implements View.OnClickLi
 		mTime = view.findViewById(R.id.time_exchange);
 		mStock = view.findViewById(R.id.now_stock);
 		mConfirm = view.findViewById(R.id.confirm_exchange);
+		mName2 = view.findViewById(R.id.name_style2);
+		mStatus2 = view.findViewById(R.id.status_style2);
+		mType2 = view.findViewById(R.id.type_style2);
+		mValid2 = view.findViewById(R.id.valid_time_style2);
+		mQrStyle1 = view.findViewById(R.id.qr_style1);
+		mQrStyle2 = view.findViewById(R.id.qr_style2);
 		initView();
 		getCouponDetailData(mScanNum);
 		return view;
@@ -118,7 +133,7 @@ public class CouponDetailFragment extends BaseFragment implements View.OnClickLi
 		getCouponDetailData(mScanNum);
 	}
 
-	CouponDetailBean detailBean;
+	CouponDetailMegeBean detailBean;
 
 	private void getCouponDetailData(String qrStr) {
 		if (TextUtils.isEmpty(qrStr)) {
@@ -132,7 +147,7 @@ public class CouponDetailFragment extends BaseFragment implements View.OnClickLi
 				try {
 					String responseStr = response.body().string();
 					Log.d("flysea", "getCouponDetailData responseStr " + responseStr);
-					java.lang.reflect.Type type = new TypeToken<CouponDetailBean>() {}.getType();
+					java.lang.reflect.Type type = new TypeToken<CouponDetailMegeBean>() {}.getType();
 					detailBean = gson.fromJson(responseStr, type);
 
 					if ( detailBean == null || detailBean.getData() == null) {
@@ -142,7 +157,11 @@ public class CouponDetailFragment extends BaseFragment implements View.OnClickLi
 						return;
 					}
 
-					updateUI(detailBean);
+					if (detailBean.getData() != null && detailBean.getCoupon() == null) {
+						updateUI(detailBean);
+					} else if (detailBean.getCoupon() !=null && detailBean.getData() == null) {
+						updateUIStyle2(detailBean);
+					}
 
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -158,7 +177,9 @@ public class CouponDetailFragment extends BaseFragment implements View.OnClickLi
 		});
 	}
 
-	private void updateUI(CouponDetailBean detailBean) {
+	private void updateUI(CouponDetailMegeBean detailBean) {
+		mQrStyle1.setVisibility(View.VISIBLE);
+		mQrStyle2.setVisibility(View.GONE);
 		mMemberInfo.setText("会员信息：" + detailBean.getData().getMember().getNickname() + "  "
 						+ detailBean.getData().getMember().getMobile_phone());
 		mPick_mode.setText("领取方式：" +detailBean.getData().getPick_mode());
@@ -168,6 +189,16 @@ public class CouponDetailFragment extends BaseFragment implements View.OnClickLi
 		mTime.setText(detailBean.getData().getCreated_at());
 		//todo no data yet
 		mStock.setText("该奖品当前库存：" + detailBean.getData().getRemaining_quantity());
+	}
+
+	private void updateUIStyle2(CouponDetailMegeBean detailBean) {
+		mQrStyle1.setVisibility(View.GONE);
+		mQrStyle2.setVisibility(View.VISIBLE);
+
+		 mName2.setText(detailBean.getCoupon().getCoupon().getName());
+		 mStatus2.setText(detailBean.getCoupon().getStatus());
+		 mType2.setText(detailBean.getCoupon().getCoupon().getCard_type());
+		 mValid2.setText(detailBean.getCoupon().getBegin_at() + " ~ " + detailBean.getCoupon().getFinish_at());
 	}
 
 	@Override

@@ -34,108 +34,208 @@
         android:layout_marginTop="10dp"
         android:background="#FFEEEBEB" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="兑换信息"
-        android:textSize="18sp"
-        android:layout_marginBottom="5dp"
-        android:textStyle="bold"/>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="5dp"
+        android:id="@+id/qr_style1"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/member_info"/>
+            android:text="兑换信息"
+            android:textSize="18sp"
+            android:layout_marginBottom="5dp"
+            android:textStyle="bold"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/member_info"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/pick_mode"
+                android:layout_marginTop="5dp"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_marginTop="10dp"
+            android:background="#FFEEEBEB" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/pick_mode"
-            android:layout_marginTop="5dp"/>
+            android:text="礼品详情"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="70dp"
+                android:id="@+id/image"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/name"
+                android:layout_marginStart="5dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="X1"
+                android:layout_marginStart="50dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/coins_num"
+                android:layout_marginStart="40dp"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/status"
+            android:gravity="end"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:text="状态：待核销"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_marginTop="10dp"
+            android:background="#FFEEEBEB" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:id="@+id/time_exchange"
+            android:text="兑换时间：2099-3-12   18:02:01"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="该奖品当前库存："
+            android:layout_marginTop="50dp"
+            android:id="@+id/now_stock"
+            android:layout_gravity="center_horizontal"/>
+
 
     </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:layout_marginTop="10dp"
-        android:background="#FFEEEBEB" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="礼品详情"
-        android:textSize="18sp"
-        android:textStyle="bold"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
+        android:layout_marginTop="200dp"
+        android:layout_marginBottom="50dp"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        android:id="@+id/qr_style2">
 
-        <ImageView
-            android:layout_width="120dp"
-            android:layout_height="70dp"
-            android:id="@+id/image"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="300dp"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/name"
-            android:layout_marginStart="5dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:text="卡券名称"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="X1"
-            android:layout_marginStart="50dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:text="状态"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/coins_num"
-            android:layout_marginStart="40dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:text="卡券类型"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:text="有效期"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="300dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:id="@+id/name_style2"
+                android:layout_marginStart="50dp"
+                android:text="卡券名称"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginStart="50dp"
+                android:id="@+id/status_style2"
+                android:text="状态"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:id="@+id/type_style2"
+                android:layout_marginStart="50dp"
+                android:text="卡券类型"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:id="@+id/valid_time_style2"
+                android:layout_marginStart="50dp"
+                android:text="有效期"/>
+
+
+        </LinearLayout>
 
     </LinearLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/status"
-        android:gravity="end"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="5dp"
-        android:text="状态：待核销"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:layout_marginTop="10dp"
-        android:background="#FFEEEBEB" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:id="@+id/time_exchange"
-        android:text="兑换时间：2099-3-12   18:02:01"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="该奖品当前库存："
-        android:layout_marginTop="50dp"
-        android:id="@+id/now_stock"
-        android:layout_gravity="center_horizontal"/>
 
     <Button
         android:layout_width="160dp"

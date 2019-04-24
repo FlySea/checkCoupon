@@ -157,10 +157,14 @@ public class CouponDetailFragment extends BaseFragment implements View.OnClickLi
 						return;
 					}
 
-					if (detailBean.getData() != null && detailBean.getCoupon() == null) {
+					if (detailBean.getData() != null && detailBean.getCoupon() == null
+							&& !TextUtils.isEmpty(detailBean.getData().getNormalize_exchangeable_name())) {
 						updateUI(detailBean);
-					} else if (detailBean.getCoupon() !=null && detailBean.getData() == null) {
+					} else if (detailBean.getCoupon() !=null && detailBean.getData() == null
+						&& !TextUtils.isEmpty(detailBean.getCoupon().getCoupon().getName())) {
 						updateUIStyle2(detailBean);
+					} else {
+						Toast.makeText(getContext(),"数据结果异常", Toast.LENGTH_LONG).show();
 					}
 
 				} catch (IOException e) {

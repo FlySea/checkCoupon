@@ -125,13 +125,13 @@ public class CouponDetailFragment extends BaseFragment implements View.OnClickLi
 	@Override
 	public void onResume() {
 		super.onResume();
-		getCouponDetailData(mScanNum);
+		//getCouponDetailData(mScanNum);
 	}
 
-	public void setId(String id) {
-		mScanNum = id;
-		getCouponDetailData(mScanNum);
-	}
+//	public void setId(String id) {
+//		mScanNum = id;
+//		getCouponDetailData(mScanNum);
+//	}
 
 	CouponDetailMegeBean detailBean;
 
@@ -152,7 +152,8 @@ public class CouponDetailFragment extends BaseFragment implements View.OnClickLi
 
 					if ( detailBean == null || detailBean.getData() == null) {
 						if (!TextUtils.isEmpty(ErrorMsg.getErrMsg(responseStr))) {
-							Toast.makeText(getContext(), ErrorMsg.getErrMsg(responseStr), Toast.LENGTH_LONG).show();
+							//Toast.makeText(getContext(), ErrorMsg.getErrMsg(responseStr), Toast.LENGTH_LONG).show();
+							showAlert(ErrorMsg.getErrMsg(responseStr));
 						}
 						return;
 					}
@@ -164,7 +165,8 @@ public class CouponDetailFragment extends BaseFragment implements View.OnClickLi
 						&& !TextUtils.isEmpty(detailBean.getCoupon().getCoupon().getName())) {
 						updateUIStyle2(detailBean);
 					} else {
-						Toast.makeText(getContext(),"数据结果异常", Toast.LENGTH_LONG).show();
+						//Toast.makeText(getContext(),"数据结果异常", Toast.LENGTH_LONG).show();
+						showAlert(ErrorMsg.getErrMsg("数据结果异常"));
 					}
 
 				} catch (IOException e) {
@@ -179,6 +181,20 @@ public class CouponDetailFragment extends BaseFragment implements View.OnClickLi
 				Toast.makeText(getContext(),"数据异常", Toast.LENGTH_LONG).show();
 			}
 		});
+	}
+
+	private void showAlert(String msg) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+		builder.setMessage(msg);
+		builder.setCancelable(true);
+		builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+			}
+		});
+		AlertDialog dialog = builder.create();
+		dialog.show();
 	}
 
 	private void updateUI(CouponDetailMegeBean detailBean) {

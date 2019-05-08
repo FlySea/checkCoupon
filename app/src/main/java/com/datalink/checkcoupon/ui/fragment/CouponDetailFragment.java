@@ -19,7 +19,7 @@ import android.widget.Toast;
 import com.datalink.checkcoupon.R;
 import com.datalink.checkcoupon.ui.activity.MainActivity;
 import com.datalink.checkcoupon.ui.model.CheckErrorBean;
-import com.datalink.checkcoupon.ui.model.CouponDetailMegeBean;
+import com.datalink.checkcoupon.ui.model.CouponDetailMegeBeanX;
 import com.datalink.checkcoupon.ui.net.CheckService;
 import com.datalink.checkcoupon.ui.net.CouponDetailService;
 import com.datalink.checkcoupon.ui.utils.ErrorMsg;
@@ -133,7 +133,7 @@ public class CouponDetailFragment extends BaseFragment implements View.OnClickLi
 //		getCouponDetailData(mScanNum);
 //	}
 
-	CouponDetailMegeBean detailBean;
+	CouponDetailMegeBeanX detailBean;
 
 	private void getCouponDetailData(String qrStr) {
 		if (TextUtils.isEmpty(qrStr)) {
@@ -147,7 +147,7 @@ public class CouponDetailFragment extends BaseFragment implements View.OnClickLi
 				try {
 					String responseStr = response.body().string();
 					Log.d("flysea", "getCouponDetailData responseStr " + responseStr);
-					java.lang.reflect.Type type = new TypeToken<CouponDetailMegeBean>() {}.getType();
+					java.lang.reflect.Type type = new TypeToken<CouponDetailMegeBeanX>() {}.getType();
 					detailBean = gson.fromJson(responseStr, type);
 
 					if ( detailBean == null || detailBean.getData() == null) {
@@ -158,11 +158,10 @@ public class CouponDetailFragment extends BaseFragment implements View.OnClickLi
 						return;
 					}
 
-					if (detailBean.getData() != null && detailBean.getCoupon() == null
-							&& !TextUtils.isEmpty(detailBean.getData().getNormalize_exchangeable_name())) {
+					if (detailBean.getData() != null && detailBean.getData().getCoupon() == null
+							&& !TextUtils.isEmpty(detailBean.getData().getPick_mode())) {
 						updateUI(detailBean);
-					} else if (detailBean.getCoupon() !=null && detailBean.getData() == null
-						&& !TextUtils.isEmpty(detailBean.getCoupon().getCoupon().getName())) {
+					} else if (detailBean.getData().getCoupon() !=null) {
 						updateUIStyle2(detailBean);
 					} else {
 						//Toast.makeText(getContext(),"数据结果异常", Toast.LENGTH_LONG).show();
@@ -197,7 +196,7 @@ public class CouponDetailFragment extends BaseFragment implements View.OnClickLi
 		dialog.show();
 	}
 
-	private void updateUI(CouponDetailMegeBean detailBean) {
+	private void updateUI(CouponDetailMegeBeanX detailBean) {
 		mQrStyle1.setVisibility(View.VISIBLE);
 		mQrStyle2.setVisibility(View.GONE);
 		mMemberInfo.setText("会员信息：" + detailBean.getData().getMember().getNickname() + "  "
@@ -211,14 +210,14 @@ public class CouponDetailFragment extends BaseFragment implements View.OnClickLi
 		mStock.setText("该奖品当前库存：" + detailBean.getData().getRemaining_quantity());
 	}
 
-	private void updateUIStyle2(CouponDetailMegeBean detailBean) {
+	private void updateUIStyle2(CouponDetailMegeBeanX detailBean) {
 		mQrStyle1.setVisibility(View.GONE);
 		mQrStyle2.setVisibility(View.VISIBLE);
 
-		 mName2.setText(detailBean.getCoupon().getCoupon().getName());
-		 mStatus2.setText(detailBean.getCoupon().getStatus());
-		 mType2.setText(detailBean.getCoupon().getCoupon().getCard_type());
-		 mValid2.setText(detailBean.getCoupon().getBegin_at() + " ~ " + detailBean.getCoupon().getFinish_at());
+		 mName2.setText(detailBean.getData().getCoupon().getCoupon().getName());
+		 mStatus2.setText(detailBean.getData().getCoupon().getStatus() + "");
+		 mType2.setText(detailBean.getData().getCoupon().getCoupon().getCard_type());
+		 mValid2.setText(detailBean.getData().getCoupon().getBegin_at() + " ~ " + detailBean.getData().getCoupon().getFinish_at());
 	}
 
 	@Override

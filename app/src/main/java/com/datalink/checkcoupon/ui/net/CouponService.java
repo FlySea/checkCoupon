@@ -12,4 +12,8 @@ public interface CouponService {
     @GET("/api/shop-exchanges")
     Call<ResponseBody> getCoupon(@Query("status") String status, @Query("page") String pageCount, @Header("Authorization") String token);
 
+    @Headers({"Content-Type:application/json;charset=utf-8", "Accept:application/json;"})
+    @GET("/api/shop-exchanges/code-used-list")
+    Call<ResponseBody> getCouponBag(@Header("Authorization") String token);
+
 }

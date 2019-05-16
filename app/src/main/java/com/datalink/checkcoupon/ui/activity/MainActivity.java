@@ -10,6 +10,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.datalink.checkcoupon.R;
+import com.datalink.checkcoupon.ui.fragment.CouponBagFragment;
 import com.datalink.checkcoupon.ui.fragment.CouponDetailFragment;
 import com.datalink.checkcoupon.ui.fragment.CouponFragment;
 import com.datalink.checkcoupon.ui.fragment.GiftDetailListFragment;
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static final int PAGER_GIFT_LIST = 2;
     public static final int PAGER_GIFT_DETAIL = 3;
     public static final int PAGER_COUPON_DETAIL = 4;
+    public static final int PAGER_COUPON_BAG = 5;
 
     public static final int REQUEST_SCAN_CODE = 100;
     public static final String EXTRA_ID = "extra_id";
@@ -34,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static final String EXTRA_SCAN_NUM = "extra_scan_num";
 
 
-    LinearLayout mCardBottomTab, mGiftBottomTab;
+    LinearLayout mCardBottomTab, mBagBottomTab,  mGiftBottomTab;
     FrameLayout mBottomContain;
     boolean mIsShowBottom = false;
 
@@ -119,6 +121,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case PAGER_COUPON_DETAIL:
                 return new CouponDetailFragment();
 
+            case PAGER_COUPON_BAG:
+                return new CouponBagFragment();
+
             default:
                 return new LoginFragment();
         }
@@ -128,9 +133,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initView(){
         mBottomContain = findViewById(R.id.bottom_container);
         mCardBottomTab = findViewById(R.id.bottom_card);
+        mBagBottomTab = findViewById(R.id.bottom_bag);
         mGiftBottomTab = findViewById(R.id.bottom_gift);
 
         mCardBottomTab.setOnClickListener(this);
+        mBagBottomTab.setOnClickListener(this);
         mGiftBottomTab.setOnClickListener(this);
     }
 
@@ -140,9 +147,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.bottom_card:
                 changePager(PAGER_COUPON, null, true);
                 break;
+            case R.id.bottom_bag:
+                changePager(PAGER_COUPON_BAG, null, true);
+                break;
             case R.id.bottom_gift:
                 changePager(PAGER_GIFT_LIST, null, true);
                 break;
+
         }
     }
 }

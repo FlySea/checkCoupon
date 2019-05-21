@@ -57,8 +57,12 @@ public class CouponBagAdapter extends RecyclerView.Adapter<CouponViewHolder> {
 		final CouponBagBean.DataBeanX.DataBean dataBean = dataList.get(i);
 		if (dataBean != null) {
 			couponViewHolder.setType(dataBean.getCoupon_code().getCoupon().getType());
-			couponViewHolder.setMember(dataBean.getCoupon_code().getMember_id() + "");
-			couponViewHolder.setPhone(dataBean.getCoupon_code().getMobile_phone());
+			if (!TextUtils.isEmpty(dataBean.getCoupon_code().getMember().getName())) {
+				couponViewHolder.setMember(dataBean.getCoupon_code().getMember().getName());
+			} else {
+				couponViewHolder.setMember(dataBean.getCoupon_code().getMember().getNickname() + "");
+			}
+			couponViewHolder.setPhone(dataBean.getCoupon_code().getMember().getMobile_phone() + "");
 			//已核销
 			couponViewHolder.setStatus("已核销");
 			couponViewHolder.setTime(dataBean.getCoupon_code().getFinish_at() + "");

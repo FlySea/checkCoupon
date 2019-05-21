@@ -4,9 +4,10 @@ import java.util.List;
 
 public class CouponBagBean {
 
+
     /**
      * code : 200
-     * data : {"current_page":1,"data":[{"id":14,"coupon_code_id":41063,"shop_id":1543,"trade_id":null,"order_id":null,"reservation_id":5,"clerk_id":null,"created_at":"2018-02-07 06:38:04","updated_at":"2018-02-07 06:38:04","status":0,"coupon_code":{"id":41063,"coupon_id":16,"status":3,"code":"Cjxk40SRtN7DwfURL4","password":null,"member_id":6221,"distributor_id":null,"mobile_phone":null,"take_at":"2018-02-06 08:00:00","begin_at":"2018-02-08 01:51:15","finish_at":"2018-03-10 01:51:15","created_at":"2018-02-07 01:51:15","updated_at":"2018-02-07 06:38:12","status_readable":"已使用","coupon":{"id":16,"merchant_id":1,"name":"不使用","code":null,"type":"card","sum":null,"market_type":"limit","market_value":"5","use_multiple":0,"threshold":null,"user_limit":0,"is_need_phone_activate":0,"user_manual":null,"valid_type":3,"valid_days":2,"callback_url":null,"price":0,"exchange_price":0,"begin_at":null,"finish_at":null,"created_at":"2018-01-25 20:28:16","updated_at":"2018-02-07 22:14:38","card_type":null,"market_value_readable":null}}}],"first_page_url":"http://erp.cblink.test/api/shop-exchanges/code-used?page=1","from":1,"next_page_url":null,"path":"http://erp.cblink.test/api/shop-exchanges/code-used","per_page":20,"prev_page_url":null,"to":3}
+     * data : {"current_page":1,"data":[{"id":14,"coupon_code_id":41063,"shop_id":1543,"trade_id":null,"order_id":null,"reservation_id":5,"clerk_id":null,"created_at":"2018-02-07 06:38:04","updated_at":"2018-02-07 06:38:04","status":0,"coupon_code":{"id":41063,"coupon_id":16,"status":3,"code":"Cjxk40SRtN7DwfURL4","password":null,"member_id":6221,"distributor_id":null,"mobile_phone":null,"take_at":"2018-02-06 08:00:00","begin_at":"2018-02-08 01:51:15","finish_at":"2018-03-10 01:51:15","created_at":"2018-02-07 01:51:15","updated_at":"2018-02-07 06:38:12","status_readable":"已使用","coupon":{"id":16,"merchant_id":1,"name":"不使用","code":null,"type":"card","sum":null,"market_type":"limit","market_value":"5","use_multiple":0,"threshold":null,"user_limit":0,"is_need_phone_activate":0,"user_manual":null,"valid_type":3,"valid_days":2,"callback_url":null,"price":0,"exchange_price":0,"begin_at":null,"finish_at":null,"created_at":"2018-01-25 20:28:16","updated_at":"2018-02-07 22:14:38","card_type":null,"market_value_readable":null},"member":{"id":6221,"email":null,"outer_member_id":null,"user_id":null,"source":"mina","app_id":null,"weixin_openid":"oL-gX0UUSSV03RNg2LQ-_V4BXXms","weixin_union_id":null,"merchant_id":1,"name":"zxw","nickname":"","avatar":"https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJoTiadO7a9vicsoeKzUN9fma5dKIIF9asLI0v6KCKu07mlpdh0eMgDEAUgYjaSBsicry0owkB6EE5AQ/0","gender":1,"province":"","city":"","mobile_phone":"18819450951","traded_num":7,"traded_money":10,"points":null,"address_id":null,"parent_id":null,"invitation":null,"status":"valid","rejected_options":null,"birthday":null,"subscribe_at":null,"deleted_at":null,"created_at":"2018-02-07 01:39:31","updated_at":"2018-02-24 00:25:27","source_readable":"小程序"}}}],"first_page_url":"http://erp.cblink.test/api/shop-exchanges/code-used?page=1","from":1,"next_page_url":null,"path":"http://erp.cblink.test/api/shop-exchanges/code-used","per_page":20,"prev_page_url":null,"to":3}
      */
 
     private int code;
@@ -31,7 +32,7 @@ public class CouponBagBean {
     public static class DataBeanX {
         /**
          * current_page : 1
-         * data : [{"id":14,"coupon_code_id":41063,"shop_id":1543,"trade_id":null,"order_id":null,"reservation_id":5,"clerk_id":null,"created_at":"2018-02-07 06:38:04","updated_at":"2018-02-07 06:38:04","status":0,"coupon_code":{"id":41063,"coupon_id":16,"status":3,"code":"Cjxk40SRtN7DwfURL4","password":null,"member_id":6221,"distributor_id":null,"mobile_phone":null,"take_at":"2018-02-06 08:00:00","begin_at":"2018-02-08 01:51:15","finish_at":"2018-03-10 01:51:15","created_at":"2018-02-07 01:51:15","updated_at":"2018-02-07 06:38:12","status_readable":"已使用","coupon":{"id":16,"merchant_id":1,"name":"不使用","code":null,"type":"card","sum":null,"market_type":"limit","market_value":"5","use_multiple":0,"threshold":null,"user_limit":0,"is_need_phone_activate":0,"user_manual":null,"valid_type":3,"valid_days":2,"callback_url":null,"price":0,"exchange_price":0,"begin_at":null,"finish_at":null,"created_at":"2018-01-25 20:28:16","updated_at":"2018-02-07 22:14:38","card_type":null,"market_value_readable":null}}}]
+         * data : [{"id":14,"coupon_code_id":41063,"shop_id":1543,"trade_id":null,"order_id":null,"reservation_id":5,"clerk_id":null,"created_at":"2018-02-07 06:38:04","updated_at":"2018-02-07 06:38:04","status":0,"coupon_code":{"id":41063,"coupon_id":16,"status":3,"code":"Cjxk40SRtN7DwfURL4","password":null,"member_id":6221,"distributor_id":null,"mobile_phone":null,"take_at":"2018-02-06 08:00:00","begin_at":"2018-02-08 01:51:15","finish_at":"2018-03-10 01:51:15","created_at":"2018-02-07 01:51:15","updated_at":"2018-02-07 06:38:12","status_readable":"已使用","coupon":{"id":16,"merchant_id":1,"name":"不使用","code":null,"type":"card","sum":null,"market_type":"limit","market_value":"5","use_multiple":0,"threshold":null,"user_limit":0,"is_need_phone_activate":0,"user_manual":null,"valid_type":3,"valid_days":2,"callback_url":null,"price":0,"exchange_price":0,"begin_at":null,"finish_at":null,"created_at":"2018-01-25 20:28:16","updated_at":"2018-02-07 22:14:38","card_type":null,"market_value_readable":null},"member":{"id":6221,"email":null,"outer_member_id":null,"user_id":null,"source":"mina","app_id":null,"weixin_openid":"oL-gX0UUSSV03RNg2LQ-_V4BXXms","weixin_union_id":null,"merchant_id":1,"name":"zxw","nickname":"","avatar":"https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJoTiadO7a9vicsoeKzUN9fma5dKIIF9asLI0v6KCKu07mlpdh0eMgDEAUgYjaSBsicry0owkB6EE5AQ/0","gender":1,"province":"","city":"","mobile_phone":"18819450951","traded_num":7,"traded_money":10,"points":null,"address_id":null,"parent_id":null,"invitation":null,"status":"valid","rejected_options":null,"birthday":null,"subscribe_at":null,"deleted_at":null,"created_at":"2018-02-07 01:39:31","updated_at":"2018-02-24 00:25:27","source_readable":"小程序"}}}]
          * first_page_url : http://erp.cblink.test/api/shop-exchanges/code-used?page=1
          * from : 1
          * next_page_url : null
@@ -135,7 +136,7 @@ public class CouponBagBean {
              * created_at : 2018-02-07 06:38:04
              * updated_at : 2018-02-07 06:38:04
              * status : 0
-             * coupon_code : {"id":41063,"coupon_id":16,"status":3,"code":"Cjxk40SRtN7DwfURL4","password":null,"member_id":6221,"distributor_id":null,"mobile_phone":null,"take_at":"2018-02-06 08:00:00","begin_at":"2018-02-08 01:51:15","finish_at":"2018-03-10 01:51:15","created_at":"2018-02-07 01:51:15","updated_at":"2018-02-07 06:38:12","status_readable":"已使用","coupon":{"id":16,"merchant_id":1,"name":"不使用","code":null,"type":"card","sum":null,"market_type":"limit","market_value":"5","use_multiple":0,"threshold":null,"user_limit":0,"is_need_phone_activate":0,"user_manual":null,"valid_type":3,"valid_days":2,"callback_url":null,"price":0,"exchange_price":0,"begin_at":null,"finish_at":null,"created_at":"2018-01-25 20:28:16","updated_at":"2018-02-07 22:14:38","card_type":null,"market_value_readable":null}}
+             * coupon_code : {"id":41063,"coupon_id":16,"status":3,"code":"Cjxk40SRtN7DwfURL4","password":null,"member_id":6221,"distributor_id":null,"mobile_phone":null,"take_at":"2018-02-06 08:00:00","begin_at":"2018-02-08 01:51:15","finish_at":"2018-03-10 01:51:15","created_at":"2018-02-07 01:51:15","updated_at":"2018-02-07 06:38:12","status_readable":"已使用","coupon":{"id":16,"merchant_id":1,"name":"不使用","code":null,"type":"card","sum":null,"market_type":"limit","market_value":"5","use_multiple":0,"threshold":null,"user_limit":0,"is_need_phone_activate":0,"user_manual":null,"valid_type":3,"valid_days":2,"callback_url":null,"price":0,"exchange_price":0,"begin_at":null,"finish_at":null,"created_at":"2018-01-25 20:28:16","updated_at":"2018-02-07 22:14:38","card_type":null,"market_value_readable":null},"member":{"id":6221,"email":null,"outer_member_id":null,"user_id":null,"source":"mina","app_id":null,"weixin_openid":"oL-gX0UUSSV03RNg2LQ-_V4BXXms","weixin_union_id":null,"merchant_id":1,"name":"zxw","nickname":"","avatar":"https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJoTiadO7a9vicsoeKzUN9fma5dKIIF9asLI0v6KCKu07mlpdh0eMgDEAUgYjaSBsicry0owkB6EE5AQ/0","gender":1,"province":"","city":"","mobile_phone":"18819450951","traded_num":7,"traded_money":10,"points":null,"address_id":null,"parent_id":null,"invitation":null,"status":"valid","rejected_options":null,"birthday":null,"subscribe_at":null,"deleted_at":null,"created_at":"2018-02-07 01:39:31","updated_at":"2018-02-24 00:25:27","source_readable":"小程序"}}
              */
 
             private int id;
@@ -255,6 +256,7 @@ public class CouponBagBean {
                  * updated_at : 2018-02-07 06:38:12
                  * status_readable : 已使用
                  * coupon : {"id":16,"merchant_id":1,"name":"不使用","code":null,"type":"card","sum":null,"market_type":"limit","market_value":"5","use_multiple":0,"threshold":null,"user_limit":0,"is_need_phone_activate":0,"user_manual":null,"valid_type":3,"valid_days":2,"callback_url":null,"price":0,"exchange_price":0,"begin_at":null,"finish_at":null,"created_at":"2018-01-25 20:28:16","updated_at":"2018-02-07 22:14:38","card_type":null,"market_value_readable":null}
+                 * member : {"id":6221,"email":null,"outer_member_id":null,"user_id":null,"source":"mina","app_id":null,"weixin_openid":"oL-gX0UUSSV03RNg2LQ-_V4BXXms","weixin_union_id":null,"merchant_id":1,"name":"zxw","nickname":"","avatar":"https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJoTiadO7a9vicsoeKzUN9fma5dKIIF9asLI0v6KCKu07mlpdh0eMgDEAUgYjaSBsicry0owkB6EE5AQ/0","gender":1,"province":"","city":"","mobile_phone":"18819450951","traded_num":7,"traded_money":10,"points":null,"address_id":null,"parent_id":null,"invitation":null,"status":"valid","rejected_options":null,"birthday":null,"subscribe_at":null,"deleted_at":null,"created_at":"2018-02-07 01:39:31","updated_at":"2018-02-24 00:25:27","source_readable":"小程序"}
                  */
 
                 private int id;
@@ -272,6 +274,7 @@ public class CouponBagBean {
                 private String updated_at;
                 private String status_readable;
                 private CouponBean coupon;
+                private MemberBean member;
 
                 public int getId() {
                     return id;
@@ -391,6 +394,14 @@ public class CouponBagBean {
 
                 public void setCoupon(CouponBean coupon) {
                     this.coupon = coupon;
+                }
+
+                public MemberBean getMember() {
+                    return member;
+                }
+
+                public void setMember(MemberBean member) {
+                    this.member = member;
                 }
 
                 public static class CouponBean {
@@ -636,6 +647,312 @@ public class CouponBagBean {
 
                     public void setMarket_value_readable(String market_value_readable) {
                         this.market_value_readable = market_value_readable;
+                    }
+                }
+
+                public static class MemberBean {
+                    /**
+                     * id : 6221
+                     * email : null
+                     * outer_member_id : null
+                     * user_id : null
+                     * source : mina
+                     * app_id : null
+                     * weixin_openid : oL-gX0UUSSV03RNg2LQ-_V4BXXms
+                     * weixin_union_id : null
+                     * merchant_id : 1
+                     * name : zxw
+                     * nickname : 
+                     * avatar : https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJoTiadO7a9vicsoeKzUN9fma5dKIIF9asLI0v6KCKu07mlpdh0eMgDEAUgYjaSBsicry0owkB6EE5AQ/0
+                     * gender : 1
+                     * province : 
+                     * city : 
+                     * mobile_phone : 18819450951
+                     * traded_num : 7
+                     * traded_money : 10
+                     * points : null
+                     * address_id : null
+                     * parent_id : null
+                     * invitation : null
+                     * status : valid
+                     * rejected_options : null
+                     * birthday : null
+                     * subscribe_at : null
+                     * deleted_at : null
+                     * created_at : 2018-02-07 01:39:31
+                     * updated_at : 2018-02-24 00:25:27
+                     * source_readable : 小程序
+                     */
+
+                    private int id;
+                    private String email;
+                    private String outer_member_id;
+                    private String user_id;
+                    private String source;
+                    private String app_id;
+                    private String weixin_openid;
+                    private String weixin_union_id;
+                    private int merchant_id;
+                    private String name;
+                    private String nickname;
+                    private String avatar;
+                    private int gender;
+                    private String province;
+                    private String city;
+                    private String mobile_phone;
+                    private int traded_num;
+                    private int traded_money;
+                    private String points;
+                    private String address_id;
+                    private String parent_id;
+                    private String invitation;
+                    private String status;
+                    private String rejected_options;
+                    private String birthday;
+                    private String subscribe_at;
+                    private String deleted_at;
+                    private String created_at;
+                    private String updated_at;
+                    private String source_readable;
+
+                    public int getId() {
+                        return id;
+                    }
+
+                    public void setId(int id) {
+                        this.id = id;
+                    }
+
+                    public String getEmail() {
+                        return email;
+                    }
+
+                    public void setEmail(String email) {
+                        this.email = email;
+                    }
+
+                    public String getOuter_member_id() {
+                        return outer_member_id;
+                    }
+
+                    public void setOuter_member_id(String outer_member_id) {
+                        this.outer_member_id = outer_member_id;
+                    }
+
+                    public String getUser_id() {
+                        return user_id;
+                    }
+
+                    public void setUser_id(String user_id) {
+                        this.user_id = user_id;
+                    }
+
+                    public String getSource() {
+                        return source;
+                    }
+
+                    public void setSource(String source) {
+                        this.source = source;
+                    }
+
+                    public String getApp_id() {
+                        return app_id;
+                    }
+
+                    public void setApp_id(String app_id) {
+                        this.app_id = app_id;
+                    }
+
+                    public String getWeixin_openid() {
+                        return weixin_openid;
+                    }
+
+                    public void setWeixin_openid(String weixin_openid) {
+                        this.weixin_openid = weixin_openid;
+                    }
+
+                    public String getWeixin_union_id() {
+                        return weixin_union_id;
+                    }
+
+                    public void setWeixin_union_id(String weixin_union_id) {
+                        this.weixin_union_id = weixin_union_id;
+                    }
+
+                    public int getMerchant_id() {
+                        return merchant_id;
+                    }
+
+                    public void setMerchant_id(int merchant_id) {
+                        this.merchant_id = merchant_id;
+                    }
+
+                    public String getName() {
+                        return name;
+                    }
+
+                    public void setName(String name) {
+                        this.name = name;
+                    }
+
+                    public String getNickname() {
+                        return nickname;
+                    }
+
+                    public void setNickname(String nickname) {
+                        this.nickname = nickname;
+                    }
+
+                    public String getAvatar() {
+                        return avatar;
+                    }
+
+                    public void setAvatar(String avatar) {
+                        this.avatar = avatar;
+                    }
+
+                    public int getGender() {
+                        return gender;
+                    }
+
+                    public void setGender(int gender) {
+                        this.gender = gender;
+                    }
+
+                    public String getProvince() {
+                        return province;
+                    }
+
+                    public void setProvince(String province) {
+                        this.province = province;
+                    }
+
+                    public String getCity() {
+                        return city;
+                    }
+
+                    public void setCity(String city) {
+                        this.city = city;
+                    }
+
+                    public String getMobile_phone() {
+                        return mobile_phone;
+                    }
+
+                    public void setMobile_phone(String mobile_phone) {
+                        this.mobile_phone = mobile_phone;
+                    }
+
+                    public int getTraded_num() {
+                        return traded_num;
+                    }
+
+                    public void setTraded_num(int traded_num) {
+                        this.traded_num = traded_num;
+                    }
+
+                    public int getTraded_money() {
+                        return traded_money;
+                    }
+
+                    public void setTraded_money(int traded_money) {
+                        this.traded_money = traded_money;
+                    }
+
+                    public String getPoints() {
+                        return points;
+                    }
+
+                    public void setPoints(String points) {
+                        this.points = points;
+                    }
+
+                    public String getAddress_id() {
+                        return address_id;
+                    }
+
+                    public void setAddress_id(String address_id) {
+                        this.address_id = address_id;
+                    }
+
+                    public String getParent_id() {
+                        return parent_id;
+                    }
+
+                    public void setParent_id(String parent_id) {
+                        this.parent_id = parent_id;
+                    }
+
+                    public String getInvitation() {
+                        return invitation;
+                    }
+
+                    public void setInvitation(String invitation) {
+                        this.invitation = invitation;
+                    }
+
+                    public String getStatus() {
+                        return status;
+                    }
+
+                    public void setStatus(String status) {
+                        this.status = status;
+                    }
+
+                    public String getRejected_options() {
+                        return rejected_options;
+                    }
+
+                    public void setRejected_options(String rejected_options) {
+                        this.rejected_options = rejected_options;
+                    }
+
+                    public String getBirthday() {
+                        return birthday;
+                    }
+
+                    public void setBirthday(String birthday) {
+                        this.birthday = birthday;
+                    }
+
+                    public String getSubscribe_at() {
+                        return subscribe_at;
+                    }
+
+                    public void setSubscribe_at(String subscribe_at) {
+                        this.subscribe_at = subscribe_at;
+                    }
+
+                    public String getDeleted_at() {
+                        return deleted_at;
+                    }
+
+                    public void setDeleted_at(String deleted_at) {
+                        this.deleted_at = deleted_at;
+                    }
+
+                    public String getCreated_at() {
+                        return created_at;
+                    }
+
+                    public void setCreated_at(String created_at) {
+                        this.created_at = created_at;
+                    }
+
+                    public String getUpdated_at() {
+                        return updated_at;
+                    }
+
+                    public void setUpdated_at(String updated_at) {
+                        this.updated_at = updated_at;
+                    }
+
+                    public String getSource_readable() {
+                        return source_readable;
+                    }
+
+                    public void setSource_readable(String source_readable) {
+                        this.source_readable = source_readable;
                     }
                 }
             }

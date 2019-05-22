@@ -65,7 +65,7 @@ public class CouponBagAdapter extends RecyclerView.Adapter<CouponViewHolder> {
 			couponViewHolder.setPhone(dataBean.getCoupon_code().getMember().getMobile_phone() + "");
 			//已核销
 			couponViewHolder.setStatus("已核销");
-			couponViewHolder.setTime(dataBean.getCoupon_code().getFinish_at() + "");
+			couponViewHolder.setTime(dataBean.getCoupon_code().getUpdated_at() + "");
 
 			couponViewHolder.root.setOnClickListener(new View.OnClickListener() {
 				@Override

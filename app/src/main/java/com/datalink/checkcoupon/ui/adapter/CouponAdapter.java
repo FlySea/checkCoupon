@@ -57,6 +57,7 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponViewHolder> {
 		final CouponBean.DataBeanX.DataBean dataBean = dataList.get(i);
 		if (dataBean!=null) {
 			couponViewHolder.setType(dataBean.getNormalize_exchangeable_name());
+			couponViewHolder.setCardName(dataBean.getNormalize_exchangeable_name());
 			couponViewHolder.setMember(dataBean.getMember().getNickname());
 			couponViewHolder.setPhone(dataBean.getMember().getMobile_phone());
 			if (TextUtils.isEmpty(dataBean.getConsumed_at())) {

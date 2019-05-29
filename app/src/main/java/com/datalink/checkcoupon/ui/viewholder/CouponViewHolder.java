@@ -13,6 +13,10 @@ public class CouponViewHolder extends RecyclerView.ViewHolder {
 		mTime.setText(time);
 	}
 
+	public void setCardName(String cardName) {
+		mCardName.setText(cardName);
+	}
+
 	public void setType(String type) {
 		mType.setText(type);
 	}
@@ -30,6 +34,7 @@ public class CouponViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	TextView mTime = itemView.findViewById(R.id.time);
+	TextView mCardName = itemView.findViewById(R.id.card_name);
 	TextView mType = itemView.findViewById(R.id.type);
 	public TextView mMember = itemView.findViewById(R.id.member);
 	TextView mPhone = itemView.findViewById(R.id.phone);

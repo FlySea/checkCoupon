@@ -144,10 +144,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.bottom_card:
+            case R.id.bottom_bag:
                 changePager(PAGER_COUPON, null, true);
                 break;
-            case R.id.bottom_bag:
+            case R.id.bottom_card:
                 changePager(PAGER_COUPON_BAG, null, true);
                 break;
             case R.id.bottom_gift:

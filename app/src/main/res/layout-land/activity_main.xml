@@ -40,7 +40,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="兑换卡券" />
+                    android:text="卡包卡券" />
 
             </LinearLayout>
 
@@ -62,7 +62,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="卡包卡券" />
+                    android:text="兑换卡券" />
 
             </LinearLayout>
 
